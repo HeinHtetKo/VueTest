@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <h1>{{ $store.state.ToDos.sayHello }}</h1>
+    <ToDos />
   </div>
 </template>
 
 <script>
+import ToDos from "./components/ToDos.vue";
+
 export default {
   name: "App",
-  components: {},
+  components: { ToDos },
 };
 </script>
 
