@@ -1,16 +1,26 @@
+import axios from "axios";
 export default {
   state: {
-    todos: [
-      { title: "title 1", id: 1 },
-      { title: "title 2", id: 2 },
-      { title: "title 3", id: 3 },
-    ],
+    todos: [],
   },
   getters: {
     myToDos(state) {
       return state.todos;
     },
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    setToDos(state, todos) {
+      state.todos = todos;
+    },
+  },
+  actions: {
+    async getToDos({ commit }) {
+      let res = await axios.get(
+        "https://my-json-server.typicode.com/typicode/demo/db"
+      );
+      let todos = res.data;
+      console.log(todos);
+      commit("setToDos", todos);
+    },
+  },
 };

@@ -3,7 +3,7 @@
     <h1 class="text-primary text-center">All ToDos!!!</h1>
     <div class="container">
       <div class="row">
-        <div class="col-md-4 my-3" v-for="todo in myToDos" :key="todo.id">
+        <div class="col-md-4 my-3" v-for="todo in myToDos.posts" :key="todo.id">
           <b-card bg-variant="primary" class="text-center">
             <b-card-text>{{ todo.title }}</b-card-text>
           </b-card>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   //   computed: {
   //     // myToDos() {
@@ -26,8 +26,9 @@ export default {
   //     ...mapGetters(["myToDos"]),
   //   },
   computed: mapGetters(["myToDos"]),
+  methods: mapActions(["getToDos"]),
   mounted() {
-    console.log(this.myToDos);
+    this.getToDos();
   },
 };
 </script>
