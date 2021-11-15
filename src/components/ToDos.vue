@@ -4,11 +4,17 @@
     <div class="container">
       <div class="row">
         <AddToDos />
+        <FilterToDos />
       </div>
       <div class="row">
         <div class="col-md-4 my-3" v-for="todo in myToDos" :key="todo.id">
           <b-card bg-variant="primary" class="text-center">
-            <b-card-text>{{ todo.title }}</b-card-text>
+            <b-card-text class="d-flex justify-content-between">
+              <span>{{ todo.title }}</span>
+              <span @click="deleteToDos(todo.id)"
+                ><b-icon icon="trash-fill" variant="danger"></b-icon
+              ></span>
+            </b-card-text>
           </b-card>
         </div>
       </div>
@@ -19,6 +25,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import AddToDos from "./AddToDos.vue";
+import FilterToDos from "./FilterToDos.vue";
 export default {
   //   computed: {
   //     // myToDos() {
@@ -29,9 +36,9 @@ export default {
   //     },
   //     ...mapGetters(["myToDos"]),
   //   },
-  components: { AddToDos },
+  components: { AddToDos, FilterToDos },
   computed: mapGetters(["myToDos"]),
-  methods: mapActions(["getToDos"]),
+  methods: mapActions(["getToDos", "deleteToDos"]),
   mounted() {
     this.getToDos();
   },
